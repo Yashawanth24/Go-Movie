@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import VideoBackGround from './VideoBackGround'
 import VideoTitle from './VideoTitle'
+import SecondaryConatainer from './SecondaryConatainer'
 const MainContainer = () => {
   const movie=useSelector(store=> store?.movies?.nowPlayingMovies);
   
@@ -14,6 +15,7 @@ const MainContainer = () => {
     <div>
         <VideoTitle title={original_title} overview={overview} />
         <VideoBackGround Movieid={id}/>
+        <SecondaryConatainer/>
 
     </div>
   )
