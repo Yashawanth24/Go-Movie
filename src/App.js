@@ -1,17 +1,17 @@
-
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Browse from './Components/Browse';
-import Header from './Components/Header';
-import MainContainer from './Components/MainContainer';
+import MovieStreamersPage from './Components/MovieStreamersPage';
 
-function App() {
+const App = () => {
   return (
-    <div >
-      <Header/>
-     <Browse/>
-     <MainContainer/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Browse />} />
+        <Route path='/watch/:movieId' element={<MovieStreamersPage />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
