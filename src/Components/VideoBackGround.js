@@ -1,15 +1,34 @@
-import React  from 'react'
+import React, { useEffect, useState }  from 'react'
 import { useSelector } from 'react-redux';
 import useMovieTrailer from '../hooks/useMovieTrailer';
 
 const VideoBackGround = ({Movieid}) => {
-   const trailerVideos=useSelector(store=>store.movies?.trailerVideos);
+   const nowPlayingMovies=useSelector(store=>store.movies?.nowPlayingMovies || []);
+  useMovieTrailer(Movieid)
    useMovieTrailer(Movieid);
-  // return(
-  //   // <div className=''>
-  //   //     <iframe className='w-screen aspect-video' src={"https://www.youtube.com/embed/"+  trailerVideos?.key  + '?&autoplay=1&mute=1' }title ="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" ></iframe>
-  //   // </div>
-  // )
-}
-
+   const [currentPosterIndex, setPosterIndex]=useState(0)
+   const posterPaths=nowPlayingMovies.map((movie)=>movie.poster_path)
+   useEffect(()=>{
+    const interval=setInterval(()=>{
+      if(posterPaths.length===0) return;
+      setPosterIndex((index)=>(index+1)%posterPaths.length);
+    },3000);
+    return ()=>clearInterval(interval);
+   },[posterPaths.length])
+   if(posterPaths.length===0){
+    return null;
+   }
+   return (
+    <div className='bg-fixed'> 
+      {posterPaths.length > 0 ? (
+        <img className='w-[46rem] h-[30rem]'
+          src={`https://image.tmdb.org/t/p/w400${posterPaths[currentPosterIndex]}`}
+          alt={`Movie poster ${currentPosterIndex + 1}`}
+        />
+      ) : (
+        <p>No posters available</p>
+      )}
+    </div>
+  );
+};
 export default VideoBackGround

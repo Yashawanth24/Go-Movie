@@ -7,9 +7,9 @@ const SecondaryConatainer = () => {
   
   return  (
     <div className=''>
-        <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies}/> 
-         <MovieList title={"Trending"} movies={movies.topratedMovies}/>
-         <MovieList title={"Popular"} movies={movies.popluarMovies}/> 
+        <MovieList id='NowPlaying' title={"Now Playing"} movies={movies.nowPlayingMovies}/> 
+         <MovieList id='Trending' title={"Trending"} movies={movies.topratedMovies}/>
+         <MovieList id='Popular' title={"Popular"} movies={movies.popluarMovies}/> 
          <MovieList title={"Upcoming Movies"} movies={movies.upcomingMovies}/>        
  </div>
   )
