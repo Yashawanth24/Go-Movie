@@ -63,27 +63,25 @@ const SearchMovie = ({ onClick }) => {
       ) : (
         <div className="overflow-x-auto">
           <ul className="flex space-x-4">
-            {movies.map((movie) => (
-              <li
-                key={movie.id}
-                className="bg-white shadow-md rounded-lg overflow-hidden w-40 h-80 cursor-pointer flex-none"
-                onClick={() => handleMovieClick(movie)}
-              >
-                {movie.poster_path ? (
-                  <img
-                    src={`${POSTER_URL}${movie.poster_path}`}
-                    alt={`${movie.title} poster`}
-                    className="w-full h-60 object-cover"
-                  />
-                ) : (
-                  <p className="w-full h-60 flex items-center justify-center bg-gray-200">No image available</p>
-                )}
-                <div className="p-2 text-center">
-                  <h2 className="text-sm font-medium">{movie.title}</h2>
-                  <p className="text-gray-500 text-xs">{movie.release_date}</p>
-                </div>
-              </li>
-            ))}
+          {movies
+  .filter((movie) => movie.poster_path)
+  .map((movie) => (
+    <li
+      key={movie.id}
+      className="bg-white shadow-md rounded-lg overflow-hidden w-40 h-80 cursor-pointer flex-none"
+      onClick={() => handleMovieClick(movie)}
+    >
+      <img
+        src={`${POSTER_URL}${movie.poster_path}`}
+        alt={`${movie.title} poster`}
+        className="w-full h-60 object-cover"
+      />
+      <div className="p-2 text-center">
+        <h2 className="text-sm font-medium">{movie.title}</h2>
+        <p className="text-gray-500 text-xs">{movie.release_date}</p>
+      </div>
+    </li>
+  ))}
           </ul>
         </div>
       )}
