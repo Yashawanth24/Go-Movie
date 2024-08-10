@@ -31,14 +31,15 @@ const MovieStreamers = () => {
 
   const getOttProvider = async () => {
     try {
+      setLoading(true);
       const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=ba71c4377129fbf8f25898b54289c778`);
       const data = await response.json();
 
       const countryProviders = data.results[selectedCountry] || {};
       const allProviders = [
-        ...countryProviders.buy || [],
-        ...countryProviders.flatrate || [],
-        ...countryProviders.rent || []
+        ...(countryProviders.buy || []),
+        ...(countryProviders.flatrate || []),
+        ...(countryProviders.rent || [])
       ];
       const providerNames = allProviders.map(provider => provider.provider_name);
       const providerImages = allProviders.map(provider => provider.logo_path);
@@ -59,16 +60,16 @@ const MovieStreamers = () => {
   }, [movieId, selectedCountry]);
 
   return (
-    <div className="bg-gray-900 text-white p-6 rounded-lg max-w-5xl mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Streaming Providers</h1>
+    <div className="text-white p-4 rounded-lg max-w-full mx-auto bg-gray-600">
+      <h1 className="text-3xl font-bold mb-6 text-center">Streaming Providers</h1>
 
-      <div className="mb-4">
-        <label htmlFor="country" className="block text-sm font-medium text-gray-300">Select Country:</label>
+      <div className="mb-6 flex justify-center">
+        <label htmlFor="country" className="block text-lg font-medium mr-4">Select Country:</label>
         <select
           id="country"
           value={selectedCountry}
           onChange={handleCountryChange}
-          className="mt-1 block w-1/3 pl-3 pr-10 py-2 text-base border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-800"
+          className="block pl-3 pr-10 py-2 bg-gray-700 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm rounded-md"
         >
           {ISO_COUNTRY_CODES.map(code => (
             <option key={code} value={code}>{code}</option>
@@ -77,33 +78,33 @@ const MovieStreamers = () => {
       </div>
 
       {loading ? (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 3 }).map((_, index) => (
-            <li key={index} className="flex items-center space-x-4 bg-gray-800 shadow-md rounded-lg p-4 animate-pulse">
-              <div className="w-16 h-16 bg-gray-600 rounded-md"></div>
-              <span className="w-32 h-6 bg-gray-600 rounded-md"></span>
+            <li key={index} className="flex items-center space-x-4 p-6 bg-gray-800 shadow-md rounded-lg animate-pulse">
+              <div className="w-16 h-16 bg-gray-700 rounded-md"></div>
+              <div className="w-32 h-6 bg-gray-700 rounded-md"></div>
             </li>
           ))}
         </ul>
       ) : providers.length > 0 ? (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {providers.map((provider, index) => (
-            <li key={index} className="flex items-center space-x-4 bg-gray-800 shadow-md rounded-lg p-4">
+            <li key={index} className="flex items-center space-x-4 p-4 bg-gray-800 shadow-md rounded-lg">
               <div>
                 {providerImages[index] && (
                   <img
-                    className="w-16 h-16 object-contain"
+                    className="w-12 h-12 object-contain rounded-md"
                     src={`${IMG_CON_URL}${providerImages[index]}`}
                     alt={provider}
                   />
                 )}
               </div>
-              <span className="text-lg font-medium">{provider}</span>
+              <span className="text-sm font-medium text-white">{provider}</span>
             </li>
           ))}
         </ul>
       ) : (
-        <h2 className="text-xl text-center text-gray-500">No streaming providers available</h2>
+        <h2 className="text-xl text-center text-gray-400">No streaming providers available</h2>
       )}
     </div>
   );

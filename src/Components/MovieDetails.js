@@ -64,7 +64,7 @@ const MovieDetails = () => {
             <div className="text-white p-4 sm:p-6 rounded-lg max-w-5xl mx-auto">
                 <div className="bg-gray-950 bg-opacity-80 p-4 sm:p-6 rounded-lg">
                     <header className="mb-6">
-                        <button className="text-gray-500 hover:text-white transition-colors mb-4">&larr; Back</button>
+                       
                         <h1 className="text-3xl sm:text-4xl font-bold text-center">{movie.title}</h1>
                         <p className="text-lg sm:text-xl italic pt-2 text-gray-300 text-center">{movie.tagline || 'No tagline available'}</p>
                     </header>

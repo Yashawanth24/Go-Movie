@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { POSTER_URL } from './Constants';
 import { useNavigate } from 'react-router-dom';
 
-const SearchMovie = ({ onClick }) => {
+const SearchMovie = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
 
   const API_KEY = 'ba71c4377129fbf8f25898b54289c778';
@@ -15,7 +16,6 @@ const SearchMovie = ({ onClick }) => {
     try {
       const response = await fetch(`${SEARCH_URL}${query}&api_key=${API_KEY}`);
       const data = await response.json();
-      console.log(data);
       setMovies(data.results);
     } catch (error) {
       console.error('Failed to fetch movies:', error);
@@ -23,9 +23,28 @@ const SearchMovie = ({ onClick }) => {
       setLoading(false);
     }
   };
+
+  const getSuggestions = async () => {
+    if (query.length === 0) {
+      setSuggestions([]);
+      return;
+    }
+    try {
+      const response = await fetch(`${SEARCH_URL}${query}&api_key=${API_KEY}`);
+      const data = await response.json();
+      setSuggestions(data.results.slice(0, 10));
+    } catch (error) {
+      console.error('Failed to fetch suggestions:', error);
+    }
+  };
+
   useEffect(() => {
-   
-  }, []);
+    const timer = setTimeout(() => {
+      getSuggestions();
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [query]);
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
@@ -35,6 +54,12 @@ const SearchMovie = ({ onClick }) => {
     e.preventDefault();
     setLoading(true);
     getSearchMovie();
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setQuery(suggestion.title); 
+    getSearchMovie(); 
+    setSuggestions([]); 
   };
 
   const handleMovieClick = (movie) => {
@@ -58,30 +83,47 @@ const SearchMovie = ({ onClick }) => {
           Search
         </button>
       </form>
+
+      {suggestions.length > 0 && (
+        <div className="bg-white shadow-md rounded-lg p-4 mb-4">
+          <ul>
+            {suggestions.map((suggestion) => (
+              <li
+                key={suggestion.id}
+                className="cursor-pointer py-1 font-medium"
+                onClick={() => handleSuggestionClick(suggestion)}
+              >
+                {suggestion.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div className="overflow-x-auto">
           <ul className="flex space-x-4">
-          {movies
-  .filter((movie) => movie.poster_path)
-  .map((movie) => (
-    <li
-      key={movie.id}
-      className="bg-white shadow-md rounded-lg overflow-hidden w-40 h-80 cursor-pointer flex-none"
-      onClick={() => handleMovieClick(movie)}
-    >
-      <img
-        src={`${POSTER_URL}${movie.poster_path}`}
-        alt={`${movie.title} poster`}
-        className="w-full h-60 object-cover"
-      />
-      <div className="p-2 text-center">
-        <h2 className="text-sm font-medium">{movie.title}</h2>
-        <p className="text-gray-500 text-xs">{movie.release_date}</p>
-      </div>
-    </li>
-  ))}
+            {movies
+              .filter((movie) => movie.poster_path)
+              .map((movie) => (
+                <li
+                  key={movie.id}
+                  className="bg-white shadow-md rounded-lg overflow-hidden w-40 h-80 cursor-pointer flex-none"
+                  onClick={() => handleMovieClick(movie)}
+                >
+                  <img
+                    src={`${POSTER_URL}${movie.poster_path}`}
+                    alt={`${movie.title} poster`}
+                    className="w-full h-60 object-cover"
+                  />
+                  <div className="p-2 text-center">
+                    <h2 className="text-sm font-medium">{movie.title}</h2>
+                    <p className="text-gray-500 text-xs">{movie.release_date}</p>
+                  </div>
+                </li>
+              ))}
           </ul>
         </div>
       )}
