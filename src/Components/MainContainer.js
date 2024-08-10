@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import VideoBackGround from './VideoBackGround'
 import VideoTitle from './VideoTitle'
 import SecondaryConatainer from './SecondaryConatainer'
 import MovieStremers from './MovieStremers'
 import SearchMovie from './SearchMovie'
 import Header from './Header'
 import Footer from './Footer'
+import Posters from './Posters'
 const MainContainer = () => {
   const movie=useSelector(store=> store?.movies?.nowPlayingMovies);
   
@@ -23,7 +23,7 @@ const MainContainer = () => {
         <SearchMovie />
       </div>
       <div className="w-1/2 bg-yellow-400 bg-gradient-to-r from-yellow-400 to-yellow-500 p-2">
-        <VideoBackGround Movieid={id} />
+        <Posters Movieid={id} />
       </div>
       <div className='overflow-x-scroll'>
       <SecondaryConatainer />

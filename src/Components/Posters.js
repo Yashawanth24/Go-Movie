@@ -1,7 +1,7 @@
 import React, { useEffect, useState }  from 'react'
 import { useSelector } from 'react-redux';
 import useMovieTrailer from '../hooks/useMovieTrailer';
-const VideoBackGround = ({ Movieid }) => {
+const Posters = ({ Movieid }) => {
   const nowPlayingMovies = useSelector(store => store.movies?.nowPlayingMovies || []);
   useMovieTrailer(Movieid);
   const [currentPosterIndex, setPosterIndex] = useState(0);
@@ -33,4 +33,4 @@ const VideoBackGround = ({ Movieid }) => {
   );
 };
 
-export default VideoBackGround
+export default Posters
