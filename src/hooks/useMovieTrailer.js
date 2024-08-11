@@ -1,21 +1,13 @@
 import { useEffect } from "react";
 import { movieTrailer } from "../utils/movieSlice";
 import { useDispatch, } from "react-redux";
-
+import { API_OPTIONS } from "../Components/Constants";
 
 const useMovieTrailer=(Movieid)=>{
-  const bearerToken = process.env.REACT_APP_BEARER_TOKEN;
+  
     const dispatch=useDispatch();
     const getMovieVideos=async()=>{
-      const OPTIONS = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      };
-      
-        const response=await fetch('https://api.themoviedb.org/3/movie/'+Movieid+'/videos?language=en-us', OPTIONS);
+        const response=await fetch('https://api.themoviedb.org/3/movie/'+Movieid+'/videos?language=en-us', API_OPTIONS);
         const data=await response.json();
        
         const filterdData=data.results.filter(video=> video.type==="Trailer");

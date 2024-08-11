@@ -6,16 +6,15 @@ const MovieDetails = () => {
     const [cast, setCast] = useState([]);
     const [error, setError] = useState(null);
     const { movieId } = useParams();
-    const bearerToken = process.env.REACT_APP_BEARER_TOKEN;
+
     useEffect(() => {
-        console.log(bearerToken)
         const fetchMovieDetails = async () => {
             try {
                 const options = {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
-                        Authorization: `Bearer ${bearerToken}`,
+                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTcxYzQzNzcxMjlmYmY4ZjI1ODk4YjU0Mjg5Yzc3OCIsIm5iZiI6MTcyMzI2NzM3NC43NjA0NjgsInN1YiI6IjY2NzgwZDMzN2RmNTJlYjY5YWZjMmI1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.w2XmKtFld6AC2JU2xHd-WxPV1uNriLB6d7zmKqMyrqo'
                     }
                 };
 

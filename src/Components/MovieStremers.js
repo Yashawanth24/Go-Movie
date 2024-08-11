@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { IMG_CON_URL } from './Constants';
-
+import { API_Key } from './Constants';
 
 const ISO_COUNTRY_CODES = [
   'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 
@@ -20,7 +20,6 @@ const ISO_COUNTRY_CODES = [
 ];
 
 const MovieStreamers = () => {
-  const API_Key = process.env.REACT_APP_API_KEY;
   const { movieId } = useParams();
   const [providers, setProviders] = useState([]);
   const [providerImages, setProviderImages] = useState([]);
@@ -56,7 +55,6 @@ const MovieStreamers = () => {
   };
 
   useEffect(() => {
-    console.log(API_Key)
     if (movieId) {
       getOttProvider();
     }

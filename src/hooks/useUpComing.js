@@ -2,20 +2,12 @@ import { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux';
 import { addUpcomingMovies } from '../utils/movieSlice';
+import { API_OPTIONS } from '../Components/Constants';
 const useUpComingMovies=()=>{
     const dispatch =useDispatch();
-    
+    const API_OPTIONS = process.env.OPTIONS;
     const getUpComingMovies= async()=>{
-        const bearerToken = process.env.REACT_APP_BEARER_TOKEN;
-        const OPTIONS = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: `Bearer ${bearerToken}`,
-            },
-          };
-          
-    const response=await fetch('https://api.themoviedb.org/3/movie/upcoming?&page=1&region=IN',OPTIONS);
+    const response=await fetch('https://api.themoviedb.org/3/movie/upcoming?&page=1&region=IN',API_OPTIONS);
     
     const data=await response.json();
 
