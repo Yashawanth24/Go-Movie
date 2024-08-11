@@ -1,32 +1,43 @@
-OTT Navigator is a powerful and flexible web application for navigating and managing various OTT (Over-the-Top) streaming platforms. With dynamic country code selection, users can seamlessly browse and discover content from different regions.
 
-// Features
-Movie Search: Search for movies by title.
-Suggestions: View movie suggestions as you type.
-Movie Details: See detailed information about movies.
-OTT Providers: Find out where movies are available for streaming.
+# Go-Movie
 
-// Technologies
-React: JavaScript library for building user interfaces.
-Tailwind CSS: Styling framework.
-TMDb API: For movie data and images.
-OTT Provider API: For streaming availability information
+This project is a Complete movie  information Site built with React. It allows users to explore movie details, including cast, ratings, and Story Overview. The app also includes a search feature and the ability to Provide Stremers Information According To Country
 
-Demo
-Check out the live demo: https://ottnavigator.vercel.app/
 
-Screenshots
+## Features
 
-Getting Started
-Prerequisites
-Make sure you have the following installed on your system:
+- Overview: Shows detailed information about a movie, including title, release date, genres, and a brief overview.
+- Cast List: Displays a list of main cast members for the movie, including their roles.
+- Streaming providers: Lists available streaming providers for the movie, According To Country 
+- Search Suggestions: When a suggestion is selected, the search bar populates with the title, and the corresponding movie poster appears below.
+- Debouncing Search: Users can search for movies with a debounced input field that suggests movie titles as they type.
 
-Node.js (v12.x or later)
-npm (v6.x or later) or Yarn
 
-Usage
-Navigating Content: Use the country selector to switch between different regions and explore the available content.
-Movie Details: Click on a movie poster to view more details about the movie.
-Search: Use the search bar to quickly find specific movies or shows.
-Favorites: Save movies and shows to your favorites list for easy access later.
-Recommendations: Check the recommendations section for personalized content suggestions.
+## Installation
+
+git clone https://github.com/Yashawanth24/Go-Movie.git
+
+```bash
+  npm install my-project
+  cd my-project
+  npm start
+
+```
+    
+## Tech Stack
+
+ **React:** Frontend library for building user interfaces.
+
+**TailwindCSS:** Custom styling for the UI.
+
+**TMDB API:** Used to fetch movie data, including details, ratings, cast information, and streaming provider data
+
+
+## Contributing
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+
+
