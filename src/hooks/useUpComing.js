@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import {API_OPTIONS} from '../Components/Constants'
+
 import { useDispatch } from 'react-redux';
 import { addUpcomingMovies } from '../utils/movieSlice';
 const useUpComingMovies=()=>{
     const dispatch =useDispatch();
-
+    const API_OPTIONS = process.env.OPTIONS;
     const getUpComingMovies= async()=>{
     const response=await fetch('https://api.themoviedb.org/3/movie/upcoming?&page=1&region=IN',API_OPTIONS);
     

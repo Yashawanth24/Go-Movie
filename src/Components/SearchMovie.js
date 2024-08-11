@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { POSTER_URL } from './Constants';
 import { useNavigate } from 'react-router-dom';
-
+import { SEARCH_URL } from './Constants';
 const SearchMovie = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
-
-  const API_KEY = 'ba71c4377129fbf8f25898b54289c778';
-  const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie?query=';
+  const API_Key = process.env.Key;
+ 
 
   const getSearchMovie = async () => {
+    
     try {
-      const response = await fetch(`${SEARCH_URL}${query}&api_key=${API_KEY}`);
+      const response = await fetch(`${SEARCH_URL}${query}&api_key=${API_Key}`);
       const data = await response.json();
       setMovies(data.results);
     } catch (error) {
@@ -30,7 +30,7 @@ const SearchMovie = () => {
       return;
     }
     try {
-      const response = await fetch(`${SEARCH_URL}${query}&api_key=${API_KEY}`);
+      const response = await fetch(`${SEARCH_URL}${query}&api_key=${API_Key}`);
       const data = await response.json();
       setSuggestions(data.results.slice(0, 10));
     } catch (error) {

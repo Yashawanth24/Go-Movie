@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { IMG_CON_URL } from './Constants';
 
+
 const ISO_COUNTRY_CODES = [
   'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 
   'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 
@@ -19,6 +20,7 @@ const ISO_COUNTRY_CODES = [
 ];
 
 const MovieStreamers = () => {
+  const API_Key = process.env.Key;
   const { movieId } = useParams();
   const [providers, setProviders] = useState([]);
   const [providerImages, setProviderImages] = useState([]);
@@ -32,7 +34,7 @@ const MovieStreamers = () => {
   const getOttProvider = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=ba71c4377129fbf8f25898b54289c778`);
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${API_Key}`);
       const data = await response.json();
 
       const countryProviders = data.results[selectedCountry] || {};

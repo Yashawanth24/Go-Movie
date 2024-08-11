@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+
 const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
     const [cast, setCast] = useState([]);
@@ -10,13 +11,8 @@ const MovieDetails = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const options = {
-                    method: 'GET',
-                    headers: {
-                        accept: 'application/json',
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTcxYzQzNzcxMjlmYmY4ZjI1ODk4YjU0Mjg5Yzc3OCIsIm5iZiI6MTcyMzI2NzM3NC43NjA0NjgsInN1YiI6IjY2NzgwZDMzN2RmNTJlYjY5YWZjMmI1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.w2XmKtFld6AC2JU2xHd-WxPV1uNriLB6d7zmKqMyrqo'
-                    }
-                };
+                const API_OPTIONS = process.env.OPTIONS;
+               const options = API_OPTIONS;
 
                 const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options);
                 const movieData = await movieResponse.json();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { API_OPTIONS } from './Constants';
+
 import { useParams } from 'react-router-dom';
 import { addProviderName } from '../utils/movieSlice';
 
@@ -8,8 +8,9 @@ const WatchProvide = () => {
   const { movieId: urlMovieId } = useParams();
   const [indianProviders, setIndianProviders] = useState(null);
   const dispatch = useDispatch();
-
+  const API_OPTIONS = process.env.OPTIONS;
   useEffect(() => {
+   
     const getWatchProvider = async () => {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${urlMovieId}/watch/providers`, API_OPTIONS);

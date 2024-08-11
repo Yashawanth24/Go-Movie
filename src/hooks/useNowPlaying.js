@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
-import {API_OPTIONS} from '../Components/Constants'
+
+
 import { useDispatch } from 'react-redux';
 import { addNowPlayingMovie } from '../utils/movieSlice';
 const useNowPlaying=()=>{
+    const API_OPTIONS = process.env.OPTIONS;
     const dispatch =useDispatch();
 
     const getNowPlayingMovie= async()=>{
