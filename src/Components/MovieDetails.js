@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-
 const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
     const [cast, setCast] = useState([]);
     const [error, setError] = useState(null);
     const { movieId } = useParams();
-
+    const bearerToken = process.env.REACT_APP_BEARER_TOKEN;
     useEffect(() => {
+        console.log(bearerToken)
         const fetchMovieDetails = async () => {
             try {
-                const API_OPTIONS = process.env.OPTIONS;
-               const options = API_OPTIONS;
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        accept: 'application/json',
+                        Authorization: `Bearer ${bearerToken}`,
+                    }
+                };
 
                 const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options);
                 const movieData = await movieResponse.json();

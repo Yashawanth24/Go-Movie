@@ -5,9 +5,17 @@ import {  addTopRatedMovies } from '../utils/movieSlice';
 const useTopRatedMovies=()=>{
     const dispatch =useDispatch();
 
-    const API_OPTIONS = process.env.OPTIONS;
     const getTopRatedMovies= async()=>{
-    const response=await fetch('https://api.themoviedb.org/3/movie/top_rated?&page=1&region=IN',API_OPTIONS);
+        const bearerToken = process.env.REACT_APP_BEARER_TOKEN;
+        const OPTIONS = {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Bearer ${bearerToken}`,
+            },
+          };
+          
+    const response=await fetch('https://api.themoviedb.org/3/movie/top_rated?&page=1&region=IN',OPTIONS);
     
     const data=await response.json();
     

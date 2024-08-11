@@ -20,7 +20,7 @@ const ISO_COUNTRY_CODES = [
 ];
 
 const MovieStreamers = () => {
-  const API_Key = process.env.Key;
+  const API_Key = process.env.REACT_APP_API_KEY;
   const { movieId } = useParams();
   const [providers, setProviders] = useState([]);
   const [providerImages, setProviderImages] = useState([]);
@@ -56,6 +56,7 @@ const MovieStreamers = () => {
   };
 
   useEffect(() => {
+    console.log(API_Key)
     if (movieId) {
       getOttProvider();
     }
