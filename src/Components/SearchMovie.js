@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {  POSTER_URL } from './Constants';
+import { API_Key, POSTER_URL } from './Constants';
 import { useNavigate } from 'react-router-dom';
 
 const SearchMovie = () => {
-  const API_Key = process.env.REACT_APP_API_KEY;
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
